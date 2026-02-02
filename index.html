@@ -25,7 +25,7 @@
             overflow-x: hidden;
         }
 
-        /* --- SIDEBAR PRISM DESIGN (The Orange Area - Desktop) --- */
+        /* --- SIDEBAR PRISM (Orange Background) --- */
         .premium-sidebar {
             position: absolute;
             top: 0;
@@ -52,7 +52,7 @@
         .font-grunge { font-family: 'Rubik Dirt', display; }
         .font-header { font-family: 'Teko', sans-serif; text-transform: uppercase; }
 
-        /* --- HERO IMAGE STYLING (Static & Solid) --- */
+        /* --- HERO IMAGE BLENDING (New Updates) --- */
         .hero-image-wrapper {
             position: relative;
             z-index: 10;
@@ -61,17 +61,44 @@
             align-items: center;
             height: 100%;
         }
+
+        /* This creates a soft orange glow BEHIND the image to make it pop */
+        .hero-image-wrapper::before {
+            content: '';
+            position: absolute;
+            width: 80%;
+            height: 80%;
+            background: radial-gradient(circle, rgba(255, 85, 0, 0.4) 0%, transparent 70%);
+            z-index: -1;
+            filter: blur(40px);
+            opacity: 0.8;
+        }
         
         .hero-image {
             width: 100%;
-            max-width: 650px; /* Limits width on big screens */
+            /* Adjusted size to be less overwhelming */
+            max-width: 580px; 
             height: auto;
-            max-height: 80vh; /* Prevents scrolling on mobile */
+            max-height: 70vh;
             object-fit: contain;
-            /* Premium static look - no rotation, just clean shadow */
-            filter: contrast(1.1) saturate(1.1);
-            drop-shadow(-20px 20px 40px rgba(0,0,0,0.5));
-            border-radius: 16px;
+            
+            /* BLENDING MAGIC: */
+            /* 1. Slight fade at the bottom so it doesn't look like a hard rectangle */
+            -webkit-mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
+            mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
+            
+            /* 2. Color grading to match the theme */
+            filter: contrast(1.15) saturate(1.1);
+            
+            /* 3. Soft shadow for depth */
+            drop-shadow(0 20px 30px rgba(0,0,0,0.5));
+            
+            border-radius: 20px;
+            transition: transform 0.5s ease;
+        }
+
+        .hero-image:hover {
+            transform: scale(1.02);
         }
 
         /* --- MENU & CARDS --- */
@@ -103,7 +130,6 @@
             box-shadow: 0 0 30px rgba(255,85,0,0.1);
         }
 
-        /* Image Containers in Menu */
         .card-image-box {
             margin-top: auto;
             padding-top: 1.5rem;
@@ -121,7 +147,6 @@
         }
         .menu-card:hover .card-img { transform: scale(1.05); opacity: 1; }
 
-        /* Map Styling - Clean & Green */
         #map { 
             height: 400px; 
             width: 100%; 
@@ -205,7 +230,6 @@
                         <div><div class="item-name text-orange-500">The Monster</div><div class="text-xs text-gray-500 italic">Vienna, Russian, Burger, Bacon, Egg</div></div>
                         <div class="item-price">R95</div>
                     </div>
-                    
                     <div class="card-image-box">
                         <img src="kota.jpg" class="card-img" alt="Kota">
                     </div>
@@ -228,7 +252,6 @@
                         <div><div class="item-name text-xl text-white">Platter For Six</div></div>
                         <div class="item-price text-2xl">R680</div>
                     </div>
-                    
                     <div class="card-image-box" style="height: 250px;">
                         <img src="platter.jpg" class="card-img" alt="Platter">
                     </div>
@@ -248,7 +271,6 @@
                     <div class="menu-item flex justify-between items-center border-none">
                         <div class="item-name text-gray-400">Wings & Chips</div><div class="item-price text-gray-500">R95</div>
                     </div>
-                    
                     <div class="card-image-box">
                         <img src="image_6.png" class="card-img" alt="Wings">
                     </div>
@@ -288,16 +310,15 @@
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script>
-        // Init Map
+        // Init Map with Greenery/Street View
         var map = L.map('map').setView([-26.2505, 27.8550], 15);
 
-        // Using standard OpenStreetMap tiles for that "Uber Eats / Greenery" look
+        // Standard OSM tiles for clear street/park visibility
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; OpenStreetMap contributors',
             maxZoom: 19
         }).addTo(map);
 
-        // Custom Orange Marker
         var orangeIcon = L.divIcon({
             className: 'custom-div-icon',
             html: "<div style='background-color:#FF5500; width: 24px; height: 24px; border-radius: 50%; border: 3px solid white; box-shadow: 0 4px 10px rgba(0,0,0,0.3);'></div>",
