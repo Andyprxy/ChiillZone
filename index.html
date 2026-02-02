@@ -25,22 +25,19 @@
             overflow-x: hidden;
         }
 
-        /* --- SIDEBAR PRISM DESIGN (The Orange Area) --- */
+        /* --- SIDEBAR PRISM DESIGN (The Orange Area - Desktop) --- */
         .premium-sidebar {
             position: absolute;
             top: 0;
             right: 0;
             width: 55%;
             height: 100vh;
-            /* Deep gradient for premium feel */
             background: linear-gradient(135deg, #FF5500 0%, #aa3300 100%);
             z-index: 0;
-            /* Sharp geometric cut */
             clip-path: polygon(15% 0, 100% 0, 100% 100%, 0% 100%);
             box-shadow: -20px 0 60px rgba(255, 85, 0, 0.3);
         }
-
-        /* Subtle texture overlay */
+        
         .premium-sidebar::before {
             content: "";
             position: absolute;
@@ -55,11 +52,10 @@
         .font-grunge { font-family: 'Rubik Dirt', display; }
         .font-header { font-family: 'Teko', sans-serif; text-transform: uppercase; }
 
-        /* --- HERO IMAGE STYLING (The Wings Picture) --- */
+        /* --- HERO IMAGE STYLING (Static & Solid) --- */
         .hero-image-wrapper {
             position: relative;
             z-index: 10;
-            perspective: 1000px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -67,30 +63,26 @@
         }
         
         .hero-image {
-            width: auto;
-            max-width: 120%; /* Slight overflow for impact */
-            max-height: 85vh;
+            width: 100%;
+            max-width: 650px; /* Limits width on big screens */
+            height: auto;
+            max-height: 80vh; /* Prevents scrolling on mobile */
             object-fit: contain;
-            /* THE JUICY FILTERS: High contrast and saturation */
-            filter: contrast(1.1) saturate(1.15) drop-shadow(-30px 30px 50px rgba(0,0,0,0.6));
-            /* Dynamic placement */
-            transform: rotate(-3deg) translateX(20px);
-            transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            border-radius: 12px;
-        }
-
-        .hero-image:hover {
-            transform: rotate(0deg) translateX(0px) scale(1.02);
-            filter: contrast(1.15) saturate(1.25) drop-shadow(-40px 40px 60px rgba(0,0,0,0.7));
+            /* Premium static look - no rotation, just clean shadow */
+            filter: contrast(1.1) saturate(1.1);
+            drop-shadow(-20px 20px 40px rgba(0,0,0,0.5));
+            border-radius: 16px;
         }
 
         /* --- MENU & CARDS --- */
         .menu-card {
             background-color: var(--brand-card);
             border: 1px solid #222;
-            transition: all 0.3s ease;
+            transition: border-color 0.3s ease;
+            display: flex;
+            flex-direction: column;
         }
-        .menu-card:hover { border-color: #333; transform: translateY(-5px); }
+        .menu-card:hover { border-color: #444; }
 
         .category-title {
             font-family: 'Teko', sans-serif;
@@ -108,15 +100,39 @@
         .highlight-card {
             background: linear-gradient(180deg, rgba(255,85,0,0.08) 0%, #111 100%);
             border: 1px solid var(--brand-orange);
-            box-shadow: 0 0 40px rgba(255,85,0,0.1);
+            box-shadow: 0 0 30px rgba(255,85,0,0.1);
         }
 
-        #map { height: 400px; width: 100%; border-radius: 12px; filter: grayscale(100%) invert(92%); }
+        /* Image Containers in Menu */
+        .card-image-box {
+            margin-top: auto;
+            padding-top: 1.5rem;
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+            border-radius: 8px;
+        }
+        .card-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.9;
+            transition: transform 0.5s ease;
+        }
+        .menu-card:hover .card-img { transform: scale(1.05); opacity: 1; }
+
+        /* Map Styling - Clean & Green */
+        #map { 
+            height: 400px; 
+            width: 100%; 
+            border-radius: 12px; 
+            background-color: #f0f0f0;
+        }
     </style>
 </head>
 <body class="relative">
 
-    <section class="relative min-h-screen flex items-center overflow-hidden py-20 lg:py-0">
+    <section class="relative min-h-screen flex items-center overflow-hidden py-12 lg:py-0 bg-gradient-to-br from-gray-900 via-black to-black lg:bg-none">
         
         <div class="premium-sidebar hidden lg:block"></div>
 
@@ -125,7 +141,6 @@
                 <div class="flex flex-col items-end border-t border-b border-gray-500 py-1 pr-2">
                     <span class="text-[0.6rem] md:text-xs text-gray-300 tracking-[0.2em] uppercase font-bold">New Era</span>
                     <span class="text-xl md:text-3xl font-bold font-poster tracking-wide text-white leading-none">CHILLZONE</span>
-                    <span class="text-[0.5rem] md:text-[0.6rem] text-gray-400 tracking-wider uppercase mt-1">Kasi Food Made With Love</span>
                 </div>
                 <i class="fas fa-utensils text-2xl text-white transform -rotate-12"></i>
             </div>
@@ -137,13 +152,13 @@
 
         <div class="relative z-10 max-w-7xl mx-auto px-6 w-full grid lg:grid-cols-2 items-center gap-12 h-full">
             
-            <div class="order-2 lg:order-1 pt-20 lg:pt-0">
+            <div class="order-2 lg:order-1 pt-10 lg:pt-0">
                 <div class="flex items-center gap-3 mb-4">
                     <div class="h-[1px] w-10 bg-orange-500"></div>
                     <span class="text-orange-500 font-bold uppercase tracking-[0.3em] text-sm">Flame Grilled Perfection</span>
                 </div>
                 
-                <h1 class="font-grunge text-6xl md:text-8xl lg:text-9xl leading-[0.8] mb-8 text-white">
+                <h1 class="font-grunge text-5xl md:text-8xl lg:text-9xl leading-[0.8] mb-8 text-white">
                     FOOD<br><span class="text-gray-500">MENU</span>
                 </h1>
                 
@@ -172,12 +187,11 @@
             <div class="flex flex-col items-center mb-20">
                 <h2 class="font-header text-6xl text-white">OUR SELECTIONS</h2>
                 <div class="w-24 h-1 bg-orange-500 mt-2"></div>
-                <p class="text-gray-500 tracking-widest uppercase text-sm mt-4">Saucy • Spicy • Legendary</p>
             </div>
 
             <div class="grid lg:grid-cols-3 gap-8 items-stretch">
                 
-                <div class="menu-card p-8 rounded-xl flex flex-col h-full">
+                <div class="menu-card p-8 rounded-xl h-full">
                     <h3 class="category-title">KOTAS</h3>
                     <div class="menu-item flex justify-between items-start">
                         <div><div class="item-name">The Special</div><div class="text-xs text-gray-500 italic">Bacon, Special, French, Cheese, Egg</div></div>
@@ -187,46 +201,40 @@
                         <div><div class="item-name">The Burger Kota</div><div class="text-xs text-gray-500 italic">Burger, Bacon, Special, French</div></div>
                         <div class="item-price">R45</div>
                     </div>
-                    <div class="menu-item flex justify-between items-start">
-                        <div><div class="item-name">The Russian</div><div class="text-xs text-gray-500 italic">Russian, French, Special, Cheese</div></div>
-                        <div class="item-price">R57</div>
-                    </div>
                     <div class="menu-item flex justify-between items-start border-none">
                         <div><div class="item-name text-orange-500">The Monster</div><div class="text-xs text-gray-500 italic">Vienna, Russian, Burger, Bacon, Egg</div></div>
                         <div class="item-price">R95</div>
                     </div>
-                    <div class="mt-auto pt-8 opacity-80 hover:opacity-100 transition duration-500">
-                        <img src="image_13.png" 
-                             class="w-full h-48 object-cover rounded-lg border border-orange-500/20" 
-                             alt="Kota preview">
+                    
+                    <div class="card-image-box">
+                        <img src="kota.jpg" class="card-img" alt="Kota">
                     </div>
                 </div>
 
-                <div class="highlight-card p-8 rounded-xl flex flex-col h-full transform lg:-translate-y-8 z-10">
+                <div class="highlight-card p-8 rounded-xl flex flex-col h-full transform lg:-translate-y-6 z-10">
                     <div class="text-center border-b border-orange-500/30 pb-6 mb-8">
                         <h3 class="category-title mb-0">SIGNATURE PLATTERS</h3>
                         <span class="text-xs text-orange-400 uppercase tracking-widest">Best Value</span>
                     </div>
                     <div class="menu-item flex justify-between items-center">
-                        <div><div class="item-name text-lg">Platter For Two</div><div class="text-xs text-gray-400">2 Pap & 2 Sides</div></div>
+                        <div><div class="item-name text-lg">Platter For Two</div></div>
                         <div class="item-price">R270</div>
                     </div>
                     <div class="menu-item flex justify-between items-center">
-                        <div><div class="item-name text-lg">Platter For Four</div><div class="text-xs text-gray-400">4 Pap & 2 Sides</div></div>
+                        <div><div class="item-name text-lg">Platter For Four</div></div>
                         <div class="item-price">R450</div>
                     </div>
                     <div class="menu-item flex justify-between items-center border-none">
-                        <div><div class="item-name text-xl text-white">Platter For Six</div><div class="text-xs text-white font-bold">The Ultimate Experience</div></div>
+                        <div><div class="item-name text-xl text-white">Platter For Six</div></div>
                         <div class="item-price text-2xl">R680</div>
                     </div>
-                    <div class="mt-auto pt-8 opacity-80 hover:opacity-100 transition duration-500">
-                        <img src="image_6.png" 
-                             class="w-full h-48 object-cover rounded-lg border border-orange-500/20" 
-                             alt="Platter preview">
+                    
+                    <div class="card-image-box" style="height: 250px;">
+                        <img src="platter.jpg" class="card-img" alt="Platter">
                     </div>
                 </div>
 
-                <div class="menu-card p-8 rounded-xl flex flex-col h-full">
+                <div class="menu-card p-8 rounded-xl h-full">
                     <h3 class="category-title">PLATES & EXTRAS</h3>
                     <div class="menu-item flex justify-between items-center">
                         <div class="item-name">Brisket & Wors</div><div class="item-price">R75</div>
@@ -237,19 +245,12 @@
                     <div class="menu-item flex justify-between items-center">
                         <div class="item-name">Pork Chops & Wings</div><div class="item-price">R95</div>
                     </div>
-                    <div class="mt-8 pt-4 border-t border-gray-800/50">
-                        <h4 class="text-gray-500 text-sm tracking-widest uppercase mb-4">Sides</h4>
-                        <div class="menu-item flex justify-between items-center">
-                            <div class="item-name text-gray-400">Wings & Chips</div><div class="item-price text-gray-500">R95</div>
-                        </div>
-                        <div class="menu-item flex justify-between items-center border-none">
-                            <div class="item-name text-gray-400">Ribs & Chips</div><div class="item-price text-gray-500">R110</div>
-                        </div>
+                    <div class="menu-item flex justify-between items-center border-none">
+                        <div class="item-name text-gray-400">Wings & Chips</div><div class="item-price text-gray-500">R95</div>
                     </div>
-                    <div class="mt-auto pt-8 opacity-80 hover:opacity-100 transition duration-500">
-                        <img src="image_10.png" 
-                             class="w-full h-48 object-cover rounded-lg border border-orange-500/20" 
-                             alt="Wings and Chips preview">
+                    
+                    <div class="card-image-box">
+                        <img src="image_6.png" class="card-img" alt="Wings">
                     </div>
                 </div>
             </div>
@@ -258,9 +259,11 @@
 
     <section class="py-16 px-6 bg-[#050505] border-t border-gray-900">
         <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
+            
             <div class="relative rounded-2xl overflow-hidden border border-gray-800 shadow-2xl order-2 lg:order-1 h-[400px]">
                 <div id="map" class="z-10 relative h-full w-full"></div>
             </div>
+            
             <div class="order-1 lg:order-2">
                 <h2 class="font-header text-5xl mb-8 text-white">FIND THE SPOT</h2>
                 <div class="space-y-8">
@@ -269,16 +272,11 @@
                             <i class="fas fa-map-pin"></i>
                         </div>
                         <div>
-                            <strong class="text-white block text-xl font-header tracking-wide mb-1">35 Lepogo Street</strong>
+                            <strong class="text-white block text-xl font-header tracking-wide mb-1">35 Legogo Street</strong>
                             <span class="text-gray-400 font-light">Jabulani Ext 1, Soweto</span>
                             <div class="text-xs text-gray-600 uppercase tracking-widest mt-2">Behind Bheki Mlangeni Hospital</div>
                         </div>
                     </div>
-                </div>
-                <div class="flex gap-6 mt-12">
-                    <a href="#" class="w-14 h-14 rounded-full bg-white text-black flex items-center justify-center hover:bg-orange-500 hover:text-white transition duration-300 text-xl"><i class="fab fa-whatsapp"></i></a>
-                    <a href="#" class="w-14 h-14 rounded-full bg-white text-black flex items-center justify-center hover:bg-orange-500 hover:text-white transition duration-300 text-xl"><i class="fab fa-instagram"></i></a>
-                    <a href="#" class="w-14 h-14 rounded-full bg-white text-black flex items-center justify-center hover:bg-orange-500 hover:text-white transition duration-300 text-xl"><i class="fab fa-facebook-f"></i></a>
                 </div>
             </div>
         </div>
@@ -290,17 +288,25 @@
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script>
+        // Init Map
         var map = L.map('map').setView([-26.2505, 27.8550], 15);
-        L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-            attribution: '&copy; OpenStreetMap', subdomains: 'abcd', maxZoom: 19
+
+        // Using standard OpenStreetMap tiles for that "Uber Eats / Greenery" look
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; OpenStreetMap contributors',
+            maxZoom: 19
         }).addTo(map);
 
+        // Custom Orange Marker
         var orangeIcon = L.divIcon({
             className: 'custom-div-icon',
-            html: "<div style='background-color:#FF5500; width: 20px; height: 20px; border-radius: 50%; border: 4px solid white; box-shadow: 0 0 20px #FF5500;'></div>",
-            iconSize: [20, 20], iconAnchor: [10, 10]
+            html: "<div style='background-color:#FF5500; width: 24px; height: 24px; border-radius: 50%; border: 3px solid white; box-shadow: 0 4px 10px rgba(0,0,0,0.3);'></div>",
+            iconSize: [24, 24], iconAnchor: [12, 12]
         });
-        L.marker([-26.2505, 27.8550], {icon: orangeIcon}).addTo(map).bindPopup("<b style='color:black'>New Era Chillzone</b>").openPopup();
+
+        L.marker([-26.2505, 27.8550], {icon: orangeIcon}).addTo(map)
+            .bindPopup("<b style='color:black; font-family:sans-serif;'>New Era Chillzone</b>")
+            .openPopup();
     </script>
 </body>
 </html>
