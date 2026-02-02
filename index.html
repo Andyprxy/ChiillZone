@@ -34,6 +34,7 @@
             height: 100vh;
             background: linear-gradient(135deg, #FF5500 0%, #aa3300 100%);
             z-index: 0;
+            /* Sharp geometric cut */
             clip-path: polygon(15% 0, 100% 0, 100% 100%, 0% 100%);
             box-shadow: -20px 0 60px rgba(255, 85, 0, 0.3);
         }
@@ -52,7 +53,7 @@
         .font-grunge { font-family: 'Rubik Dirt', display; }
         .font-header { font-family: 'Teko', sans-serif; text-transform: uppercase; }
 
-        /* --- HERO IMAGE BLENDING (New Updates) --- */
+        /* --- HERO IMAGE STYLING (Solid & Large) --- */
         .hero-image-wrapper {
             position: relative;
             z-index: 10;
@@ -60,45 +61,30 @@
             justify-content: center;
             align-items: center;
             height: 100%;
-        }
-
-        /* This creates a soft orange glow BEHIND the image to make it pop */
-        .hero-image-wrapper::before {
-            content: '';
-            position: absolute;
-            width: 80%;
-            height: 80%;
-            background: radial-gradient(circle, rgba(255, 85, 0, 0.4) 0%, transparent 70%);
-            z-index: -1;
-            filter: blur(40px);
-            opacity: 0.8;
+            /* Allow image to bleed slightly if needed for impact */
+            overflow: visible; 
         }
         
         .hero-image {
-            width: 100%;
-            /* Adjusted size to be less overwhelming */
-            max-width: 580px; 
+            width: 140%; /* Enlarged to fit the orange area better */
+            max-width: 800px; 
             height: auto;
-            max-height: 70vh;
+            max-height: 85vh;
             object-fit: contain;
             
-            /* BLENDING MAGIC: */
-            /* 1. Slight fade at the bottom so it doesn't look like a hard rectangle */
-            -webkit-mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
-            mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
+            /* Clean, Solid Look (No Fading) */
+            filter: contrast(1.1) saturate(1.1);
+            drop-shadow(-30px 30px 60px rgba(0,0,0,0.5));
             
-            /* 2. Color grading to match the theme */
-            filter: contrast(1.15) saturate(1.1);
+            /* Slight rotation to fit the dynamic angle of the orange slash */
+            transform: rotate(-2deg);
+            border-radius: 12px;
             
-            /* 3. Soft shadow for depth */
-            drop-shadow(0 20px 30px rgba(0,0,0,0.5));
-            
-            border-radius: 20px;
             transition: transform 0.5s ease;
         }
 
         .hero-image:hover {
-            transform: scale(1.02);
+            transform: scale(1.02) rotate(0deg);
         }
 
         /* --- MENU & CARDS --- */
@@ -310,8 +296,8 @@
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script>
-        // Init Map with Greenery/Street View
-        var map = L.map('map').setView([-26.2505, 27.8550], 15);
+        // Init Map with Greenery/Street View (Corrected Coordinates)
+        var map = L.map('map').setView([-26.244889, 27.858167], 16);
 
         // Standard OSM tiles for clear street/park visibility
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -325,7 +311,7 @@
             iconSize: [24, 24], iconAnchor: [12, 12]
         });
 
-        L.marker([-26.2505, 27.8550], {icon: orangeIcon}).addTo(map)
+        L.marker([-26.244889, 27.858167], {icon: orangeIcon}).addTo(map)
             .bindPopup("<b style='color:black; font-family:sans-serif;'>New Era Chillzone</b>")
             .openPopup();
     </script>
